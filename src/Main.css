@@ -1,0 +1,29 @@
+
+.Main{
+    margin-top: 3rem;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: 400;
+}
+
+.Main-title h1 {
+    font-size: 72px;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    letter-spacing: 1rem;
+}
+
+.Main-title-img img{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.Main-title-question h3 {
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.Main-location-link{
+    color:#32292F;
+    font-size: 24px;
+    margin: 1rem;
+}

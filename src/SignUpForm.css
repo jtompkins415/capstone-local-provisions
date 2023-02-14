@@ -1,0 +1,17 @@
+.SignupForm-title h1 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    letter-spacing: .3em;
+}
+
+
+.SignupForm {
+    margin-top: 2em;
+}
+
+.SignupForm-label {
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.SignupForm-button {
+    margin: .5em;
+}

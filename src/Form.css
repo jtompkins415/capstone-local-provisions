@@ -1,0 +1,19 @@
+.form-title h1 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    letter-spacing: .3em;
+    color:#32292F;
+}
+
+
+.form {
+    margin-top: 2em;
+}
+
+.form-label {
+    font-family: 'PT Sans Narrow', sans-serif;
+    color:#32292F;
+}
+
+.form-button {
+    margin: .5em;
+}

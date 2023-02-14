@@ -1,0 +1,10 @@
+.Navbar{
+    background-color: #EAE8FF;
+}
+
+.nav-link {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #32292F;
+}

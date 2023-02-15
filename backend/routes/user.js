@@ -9,6 +9,22 @@ const {
 } = require('../expressError');
 
 
+/**GET: A List of all Users 
+ * 
+*/
+
+router.get('/', async (req, res, next) => {
+    try{
+        const results = await User.findAll();
+
+        return res.status(200).json({results});
+    } catch(err){
+        return next(err);
+    }
+
+})
+
+
 /**GET: Get details on a user 
  * 
  * Return user information
@@ -91,4 +107,4 @@ router.delete('/:username', async (req, res, next) => {
     }
 }) 
 
-module.export = router
+module.exports = router

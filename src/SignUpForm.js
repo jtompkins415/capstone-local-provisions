@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Form,
     FormGroup,
@@ -10,7 +11,7 @@ import {
 import './Form.css'
 
 const SignUpForm = ({signup}) => {
-    
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -19,18 +20,30 @@ const SignUpForm = ({signup}) => {
         password: ''
     })
     
+    const [formErrors, setFormErrors] = useState([])
+
+
     const handleChange = (evt) => {
         const {name, value} = evt.target
         setFormData(data => ({...data,[name]:value}));
     }
 
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        let res = await signup(formData);
+        if(res.success){
+            return navigate('/main')
+        } else {
+            setFormData(res.errors);
+        }
+    }
 
     return (
         <div>
             <div className='form-title'>
                 <h1> CREATE AN ACCOUNT </h1>
             </div>
-        <Form className='form'>
+        <Form className='form' onSubmit={handleSubmit}>
             <FormGroup row>
                 <Label className="form-label" htmlFor='firstName' sm={3}>FIRST NAME: </Label>
                 <Col sm={8}>

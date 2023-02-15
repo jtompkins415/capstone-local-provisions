@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import './NavBar.css';
 
-const NavBar = () => {
+const NavBar = ({logout}) => {
     return (
         
             <Nav className="Navbar" justified>

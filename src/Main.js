@@ -1,8 +1,3 @@
-import {useState} from 'react';
-import NavBar from './NavBar';
-import {
-    Button
-} from 'reactstrap';
 import image from './SFcityscape.jpeg'
 import './Main.css'
 

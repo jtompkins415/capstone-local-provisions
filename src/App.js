@@ -2,7 +2,7 @@ import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import { decodeToken } from 'react-jwt';
-import LocalProvisionsUserAPI from './api';
+import LocalProvisionsUserAPI from './api/baseurl/api';
 import UserContext from './UserContext';
 
 import Home from './Home';
@@ -10,7 +10,7 @@ import NavBar from './NavBar';
 import SignUpForm from './SignUpForm';
 import LoginForm from './LoginForm';
 import Main from './Main';
-import Region from './Region';
+import Region from './region/Region';
 import './App.css';
 
 /**  A key to store token in local storage */

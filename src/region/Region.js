@@ -4,8 +4,8 @@ import { Spinner } from 'reactstrap';
 
 import POICard from './POICard'
 import regionMap from './regionMap';
-import API_KEY from './APIKey';
-import BASE_URL from './BaseUrl';
+import API_KEY from '../api/baseurl/APIKey';
+import BASE_URL from '../BaseUrl';
 
 import './Region.css';
 
@@ -16,9 +16,14 @@ const Region = ({regName}) => {
     const [longitude, setLongitude] = useState(null); 
     const [pois, setPois] = useState([]);
     
+    /** Access Google Geocoding API
+     *  get latitude and longitude from region name 
+     * set latitude & lng state w/ API data
+     * 
+     * */
 
     useEffect(() => {
-        async function getCoordinates(){
+        async function getLatLng(){
             let res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${regName}&key=${API_KEY}`)
                 
             const {lat, lng} = res.data.results[0].geometry.location;
@@ -26,9 +31,13 @@ const Region = ({regName}) => {
             setLongitude(lng);
             setIsLoaded(true);
         }
-        getCoordinates();
+        getLatLng();
     })
 
+    /** Access Google Places API
+     * use latitude and longitude state 
+     * Return nearby places of interest
+     */
     useEffect(() => {
         async function getPOIs(){
             let res = await axios.get(`${BASE_URL}location=${latitude}%2C${longitude}&radius=1500&key=${API_KEY}`)

@@ -6,17 +6,19 @@ import {
     Button
 } from 'reactstrap';
 
-const POICard = ({name, rating, url}) => {
+const POICard = ({name, rating, price_level}) => {
     
     return (
-        <Card>
+        <Card style={{
+            width: '10px'
+        }} >
             <CardBody>
                 <CardTitle>
                     {name}
                 </CardTitle>
                 <CardText>
                     Rating: {rating}
-                    Website: {url}
+                    Website: {price_level}
                 </CardText>
                 <Button>
                   Add to Favorites!

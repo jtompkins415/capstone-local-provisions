@@ -11,6 +11,7 @@ const Main = () => {
         <div className="Main">
             <div className='Main-title'>
                 <h1>LOCAL PROVISIONS</h1>
+                <h3>EAT. DRINK. EXPLORE.</h3>
             </div>
             <div className="Main-title-img">
                 <img src={image} alt="city scape"/>

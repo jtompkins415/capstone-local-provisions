@@ -29,7 +29,7 @@ const Region = ({regName}) => {
             const {lat, lng} = res.data.results[0].geometry.location;
             setLatitude(lat);
             setLongitude(lng);
-            
+            setIsLoaded(true);
         }
         getLatLng();
     })
@@ -42,8 +42,7 @@ const Region = ({regName}) => {
         async function getPOIs(){
             let res = await axios.get(`${BASE_URL}location?lat=${latitude}&lng=${longitude}&radius=1500&type=restaurant&rankby=prominence&key=${API_KEY}`)
             
-            setPois(res.data.results)
-            setIsLoaded(true);
+            setPois(res.data.results) 
         }
         getPOIs();
     },[])

@@ -1,10 +1,9 @@
-
-const express = require("express");
+const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const axios = require('axios');
 
-
-const {NotFoundError} = require('./expressError');
+const { NotFoundError } = require('./expressError');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -16,21 +15,33 @@ app.use(express.json());
 //User Routes
 app.use('/user', userRoutes);
 
+//Route to talk to Google Places API
+app.get(`/maps/api/place/nearbysearch/location`, async (req, res, next) => {
+	const { lat, lng, radius, type, key } = req.query;
+	const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}
+  %2C${lng}&radius=${radius}&type=${type}&key=${key}`;
+	try {
+		const results = await axios.get(url);
+		return res.json(results.data);
+	} catch (err) {
+		return next(err);
+	}
+});
 
 /** Handle 404 errors -- this matches everything */
-app.use(function (req, res, next) {
-  return next(new NotFoundError());
+app.use(function(req, res, next) {
+	return next(new NotFoundError());
 });
 
 app.use(function(err, req, res, next) {
-    // the default status is 500 Internal Server Error
-    let status = err.status || 500;
-    let message = err.message;
-  
-    // set the status and alert the user
-    return res.status(status).json({
-      error: {message, status}
-    });
-  });
+	// the default status is 500 Internal Server Error
+	let status = err.status || 500;
+	let message = err.message;
+
+	// set the status and alert the user
+	return res.status(status).json({
+		error: { message, status }
+	});
+});
 
 module.exports = app;

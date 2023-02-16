@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Spinner } from 'reactstrap';
+import { Spinner, CardGroup } from 'reactstrap';
 
 import POICard from './POICard'
 import regionMap from './regionMap';
@@ -29,7 +29,7 @@ const Region = ({regName}) => {
             const {lat, lng} = res.data.results[0].geometry.location;
             setLatitude(lat);
             setLongitude(lng);
-            setIsLoaded(true);
+            
         }
         getLatLng();
     })
@@ -40,19 +40,24 @@ const Region = ({regName}) => {
      */
     useEffect(() => {
         async function getPOIs(){
-            let res = await axios.get(`${BASE_URL}location=${latitude}%2C${longitude}&radius=1500&key=${API_KEY}`)
-            console.log(res);
+            let res = await axios.get(`${BASE_URL}location?lat=${latitude}&lng=${longitude}&radius=1500&type=restaurant&rankby=prominence&key=${API_KEY}`)
+            
+            setPois(res.data.results)
+            setIsLoaded(true);
         }
         getPOIs();
-    })
+    },[])
 
+    
     if (!isLoaded) return <Spinner color='warning'  style={{
         height: '3rem',
         width: '3rem',
         margin: '5rem'
       }} />
         
-    
+    let poiElm = pois.map(p => {
+        return <POICard key={p.name} name={p.name} rating={p.rating} price_level={p.price_level} />
+    })
     
     let imageUrl = regionMap[regName]
 
@@ -66,6 +71,11 @@ const Region = ({regName}) => {
             </div>
             <div className="Region-title">
                 <h1>{regName.toUpperCase()}</h1>
+            </div>
+            <div className='Region-body'>
+                <CardGroup>
+                    {poiElm};
+                </CardGroup>
             </div>
         </div>
     )

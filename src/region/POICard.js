@@ -5,13 +5,13 @@ import {
     CardText,
     Button
 } from 'reactstrap';
+import './POICard.css'
 
 const POICard = ({name, rating, price_level}) => {
     
     return (
-        <Card style={{
-            width: '10px'
-        }} >
+   
+        <Card className='poiCard'>
             <CardBody>
                 <CardTitle>
                     {name}
@@ -25,7 +25,7 @@ const POICard = ({name, rating, price_level}) => {
                 </Button>
             </CardBody>
         </Card>
-
+   
     )
 };
 

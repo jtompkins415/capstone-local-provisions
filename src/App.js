@@ -91,7 +91,8 @@ function App() {
           <Route path='/signup' element={<SignUpForm signup={signup}/>} />
           <Route path='/main' element={<Main />} />
           <Route path='/login' element={<LoginForm login={login}/>} />
-          <Route path='/sf-bayarea' element={<Region regName='sf / bay area'/>} />
+          <Route path='/sf-bayarea' element={<Region regName='san francisco'/>} />
+          <Route path='/los-angeles' element={<Region regName='los angeles'/>} />
         </Routes>
       </BrowserRouter>
     </div>

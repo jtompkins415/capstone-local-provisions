@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import { Spinner, CardGroup } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 
 import POICard from './POICard'
 import regionMap from './regionMap';

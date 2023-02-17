@@ -1,3 +1,7 @@
+import {useEffect} from 'react';
+import API_KEY from '../api/baseurl/APIKey';
+import {BASE_URL_PHOTO} from '../BaseUrl';
+import axios from 'axios';
 import {
     Card,
     CardTitle,
@@ -7,20 +11,32 @@ import {
 } from 'reactstrap';
 import './POICard.css'
 
-const POICard = ({name, rating, price_level}) => {
+const POICard = ({name, rating, price_level, img}) => {
+
+    useEffect(() => {
+        async function getImg(){
+            let results = await axios.get(`${BASE_URL_PHOTO}?maxwidth=400&photo_reference=${img}
+            &key=${API_KEY}`)
+            
+            console.log(results);
+        }
+        
+        getImg();
+    })
     
     return (
    
         <Card className='poiCard'>
             <CardBody>
-                <CardTitle>
+                <CardTitle className='poiCard-title'>
                     {name}
                 </CardTitle>
                 <CardText>
                     Rating: {rating}
-                    Website: {price_level}
+                    <br/>
+                    Price: {price_level}
                 </CardText>
-                <Button>
+                <Button className='poiCard-button'>
                   Add to Favorites!
                 </Button>
             </CardBody>

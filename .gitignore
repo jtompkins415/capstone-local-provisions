@@ -12,7 +12,7 @@
 /build
 
 #API KEY
-/src/APIKey.js
+/src/api/baseurl/APIKey.js
 
 # misc
 .DS_Store

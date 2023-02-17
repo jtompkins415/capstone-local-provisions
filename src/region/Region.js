@@ -5,7 +5,7 @@ import { Spinner, CardGroup } from 'reactstrap';
 import POICard from './POICard'
 import regionMap from './regionMap';
 import API_KEY from '../api/baseurl/APIKey';
-import BASE_URL from '../BaseUrl';
+import {BASE_URL_NEARBY} from '../BaseUrl';
 
 import './Region.css';
 
@@ -31,21 +31,22 @@ const Region = ({regName}) => {
             setLongitude(lng);
             setIsLoaded(true);
         }
+        
         getLatLng();
     })
 
-    /** Access Google Places API
+    /** Access custom API to send request to Google Places API
      * use latitude and longitude state 
      * Return nearby places of interest
-     */
+     */ 
     useEffect(() => {
         async function getPOIs(){
-            let res = await axios.get(`${BASE_URL}location?lat=${latitude}&lng=${longitude}&radius=1500&type=restaurant&rankby=prominence&key=${API_KEY}`)
+            let res = await axios.get(`${BASE_URL_NEARBY}location?lat=${latitude}&lng=${longitude}&radius=1500&type=restaurant&rankby=prominence&key=${API_KEY}`)
             
             setPois(res.data.results) 
         }
         getPOIs();
-    },[])
+    },[latitude, longitude])
 
     
     if (!isLoaded) return <Spinner color='warning'  style={{
@@ -53,9 +54,11 @@ const Region = ({regName}) => {
         width: '3rem',
         margin: '5rem'
       }} />
-        
+
+    console.log(pois)
+
     let poiElm = pois.map(p => {
-        return <POICard key={p.name} name={p.name} rating={p.rating} price_level={p.price_level} />
+        return <POICard key={p.name} name={p.name} rating={p.rating} price_level={p.price_level} img={p.photos[0].photo_reference} />
     })
     
     let imageUrl = regionMap[regName]
@@ -72,9 +75,8 @@ const Region = ({regName}) => {
                 <h1>{regName.toUpperCase()}</h1>
             </div>
             <div className='Region-body'>
-                <CardGroup>
-                    {poiElm};
-                </CardGroup>
+                    {poiElm}
+
             </div>
         </div>
     )

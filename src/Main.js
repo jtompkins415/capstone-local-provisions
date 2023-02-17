@@ -1,4 +1,4 @@
-import image from './SFcityscape.jpeg'
+import image from './busyshops.jpeg'
 import './Main.css'
 
 const Main = () => {

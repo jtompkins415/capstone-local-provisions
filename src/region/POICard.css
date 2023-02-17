@@ -1,5 +1,12 @@
 .poiCard {
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: 400;
+    width: 30rem;
+    margin-bottom: 2rem;
 
+}
+
+.poiCard-title {
+    font-weight: 700;
+    font-size: 24px;
 }

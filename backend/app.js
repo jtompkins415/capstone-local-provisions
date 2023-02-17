@@ -28,6 +28,19 @@ app.get(`/maps/api/place/nearbysearch/location`, async (req, res, next) => {
 	}
 });
 
+//Route to talk to Google Place Picture API
+app.get('/maps/api/place/photo', async (req, res, next) => {
+	const {maxwidth, photo_reference, key} = req.query;
+	const url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxwidth}&photo_reference=${photo_reference}&key=${key}`;
+	
+	try{
+		const results = await axios.get(url);
+		return res.json(results.data);
+	} catch(err){
+		return next(err);
+	}
+});
+
 /** Handle 404 errors -- this matches everything */
 app.use(function(req, res, next) {
 	return next(new NotFoundError());

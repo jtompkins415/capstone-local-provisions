@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const axios = require('axios');
+const bodyparser = require('body-parser');
 
 const { NotFoundError } = require('./expressError');
 const userRoutes = require('./routes/user');
@@ -11,6 +12,8 @@ const app = express();
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.json());
 
 //User Routes
 app.use('/user', userRoutes);

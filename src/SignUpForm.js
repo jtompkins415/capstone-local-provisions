@@ -8,6 +8,7 @@ import {
     Button,
     Col
 } from 'reactstrap';
+import Alert from './Alert';
 import './Form.css'
 
 const SignUpForm = ({signup}) => {
@@ -34,7 +35,7 @@ const SignUpForm = ({signup}) => {
         if(res.success){
             return navigate('/main')
         } else {
-            setFormData(res.errors);
+            setFormErrors(res.errors);
         }
     }
 
@@ -74,6 +75,10 @@ const SignUpForm = ({signup}) => {
                 <Input className='form-input'  id='password' name='password' type='password' value={formData.password} onChange={handleChange} />
                 </Col>
             </FormGroup>
+
+            {/* {formErrors.length ? <Alert type="danger" messages={formErrors} />
+            : null} */}
+
             <Button outline className="form-button" color="success">
                 Sign Up
             </Button>
@@ -85,4 +90,4 @@ const SignUpForm = ({signup}) => {
     )
 };
 
-export default SignUpForm;
+export default SignUpForm; 

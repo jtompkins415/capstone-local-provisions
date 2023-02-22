@@ -68,7 +68,7 @@ router.get('/token', async (req, res, next) => {
         const {username, password} = req.body;
         const user = await User.authenticate(username, password);
         const token = createToken(user);
-        return res.status(200).json({token});
+        return res.status(200).json(token);
     } catch(err) {
         return next(err);
     }

@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import API_KEY from '../api/baseurl/APIKey';
 import {BASE_URL_PHOTO} from '../BaseUrl';
 import axios from 'axios';
+import dollarSignImage from '../dollar-sign.svg';
 import {
     Card,
     CardTitle,
@@ -13,16 +14,18 @@ import './POICard.css'
 
 const POICard = ({name, rating, price_level, img}) => {
 
-    useEffect(() => {
-        async function getImg(){
-            let results = await axios.get(`${BASE_URL_PHOTO}?maxwidth=400&photo_reference=${img}
-            &key=${API_KEY}`)
+    // useEffect(() => {
+    //     async function getImg(){
+    //         let results = await axios.get(`${BASE_URL_PHOTO}?maxwidth=400&photo_reference=${img}
+    //         &key=${API_KEY}`)
             
-            console.log(results);
-        }
+    //         console.log(results);
+    //     }
         
-        getImg();
-    })
+    //     getImg();
+    // })
+
+    let dollarSigns = '$'.repeat(price_level);
     
     return (
    
@@ -34,7 +37,7 @@ const POICard = ({name, rating, price_level, img}) => {
                 <CardText>
                     Rating: {rating}
                     <br/>
-                    Price: {price_level}
+                    Price: {dollarSigns}
                 </CardText>
                 <Button className='poiCard-button'>
                   Add to Favorites!

@@ -37,7 +37,7 @@ class LocalProvisionsUserAPI {
     /** Get login token from username and password  */
 
     static async userLogin(data){
-        let res = await this.request('user/token', {data}, 'post')
+        let res = await this.request('user/token', {data}, 'get')
         return res.token
     }
 

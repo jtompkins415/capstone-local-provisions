@@ -1,6 +1,6 @@
 
 .Main{
-    margin-top: 3rem;
+    margin-top: 2rem;
     font-family: 'PT Sans Narrow', sans-serif;
     font-weight: 400;
 }
@@ -25,10 +25,8 @@
     margin-bottom: 1rem;
 }
 
-.Main-title-question h3 {
-    color:#32292F;
-    font-weight: 400;
-    font-size: 32px;
+.Main-body{
+    margin-bottom: 1rem;
 }
 
 .Main-location-link{

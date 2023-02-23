@@ -30,7 +30,8 @@ router.get('/', async (req, res, next) => {
  * Return user information
 */
 
-router.get('/:username', async (req, res, next) => {
+router.get('/detail/:username', async (req, res, next) => {
+    console.log("I'm here")
     try{
         const {username} = req.params;
         const user = await User.get(username);
@@ -59,6 +60,7 @@ router.post('/register', async (req, res, next) => {
     }
 });
 
+
 /** GET: Authenticate User
  * 
  * 
@@ -66,7 +68,7 @@ router.post('/register', async (req, res, next) => {
 
 router.get('/token', async (req, res, next) => {
     try{
-        const {username, password} = req.body;
+        const {username, password} = req.query;
         const user = await User.authenticate(username, password);
         const token = createToken(user);
         return res.status(200).json(token);
@@ -81,6 +83,7 @@ router.get('/token', async (req, res, next) => {
  */
 
 router.patch('/:username/update', async (req, res, next) => {
+    console.log("I'm here too")
     try{
         const {username} = req.params;
         const user = await User.update(username, {...req.body});

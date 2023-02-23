@@ -68,6 +68,10 @@ class User {
       throw new BadRequestError(`Duplicate username: ${username}`);
     }
 
+    if (!password) {
+      throw new BadRequestError("Password is required");
+    }
+
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
     const result = await db.query(
@@ -91,6 +95,8 @@ class User {
     );
 
     const user = result.rows[0];
+    
+    console.log('user.register() user'. user);
 
     return user;
   }

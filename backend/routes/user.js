@@ -50,6 +50,7 @@ router.get('/:username', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
     try{
+        console.log('req.body: ', req.body)
         const newUser = await User.register({...req.body, isAdmin:false});
         const newToken = createToken(newUser);
         return res.status(201).json({newToken});

@@ -1,8 +1,8 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import API_KEY from '../api/baseurl/APIKey';
 import {BASE_URL_PHOTO} from '../BaseUrl';
+import {BASE_URL_DETAILS} from '../BaseUrl'
 import axios from 'axios';
-import dollarSignImage from '../dollar-sign.svg';
 import {
     Card,
     CardTitle,
@@ -12,30 +12,46 @@ import {
 } from 'reactstrap';
 import './POICard.css'
 
-const POICard = ({name, rating, price_level, img}) => {
+const POICard = ({name, rating, price_level, place_id}) => {
+    
+    const [photoUrl, setPhotoUrl] = useState(null)
+    const [poiUrl, setPoiUrl] = useState(null)
 
-    // useEffect(() => {
-    //     async function getImg(){
-    //         let results = await axios.get(`${BASE_URL_PHOTO}?maxwidth=400&photo_reference=${img}
-    //         &key=${API_KEY}`)
-            
-    //         console.log(results);
-    //     }
+    console.log(place_id);
+    
+    
+    useEffect(() => {
+        async function getPlaceDetails(){
+            const response = await axios.get(`${BASE_URL_DETAILS}?place_id=${place_id}&fields=photo&key=${API_KEY}`);
+            const photoRef = response.data.result?.photos?.[0]?.photo_reference;
         
-    //     getImg();
-    // })
+            if(photoRef){
+                const photoUrl = `${BASE_URL_PHOTO}?maxwidth=400&photo_reference=${photoRef}&key=${API_KEY}`;
+                setPhotoUrl(photoUrl);
+            }
 
+            
+        }
+        getPlaceDetails();
+    }, [place_id])
+
+    
     let dollarSigns = '$'.repeat(price_level);
     
     return (
    
         <Card className='poiCard'>
+            {photoUrl && (
+                <div className='poiCard-img-wrapper'>
+                    <img className='poiCard-img' src={photoUrl} alt={name} />
+                </div>
+            )}
             <CardBody>
                 <CardTitle className='poiCard-title'>
                     {name}
                 </CardTitle>
                 <CardText>
-                    Rating: {rating}
+                   <b> Rating: {rating}</b>
                     <br/>
                     Price: {dollarSigns}
                 </CardText>

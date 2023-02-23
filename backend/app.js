@@ -25,16 +25,17 @@ app.get(`/maps/api/place/nearbysearch/location`, async (req, res, next) => {
   %2C${lng}&radius=${radius}&type=${type}&key=${key}`;
 	try {
 		const results = await axios.get(url);
+		console.log(results);
 		return res.json(results.data);
 	} catch (err) {
 		return next(err);
 	}
 });
 
-//Route to talk to Google Place Picture API
-app.get('/maps/api/place/photo', async (req, res, next) => {
-	const {maxwidth, photo_reference, key} = req.query;
-	const url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=${maxwidth}&photo_reference=${photo_reference}&key=${key}`;
+//Route to talk to Google Place Details API
+app.get('/maps/api/place/details/place_id', async (req, res, next) => {
+	const {place_id, fields, key} = req.query;
+	const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=${fields}&key=${key}`;
 	
 	try{
 		const results = await axios.get(url);

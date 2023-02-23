@@ -1,17 +1,13 @@
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import { decodeToken } from 'react-jwt';
 import LocalProvisionsUserAPI from './api/baseurl/api';
 import UserContext from './UserContext';
-
-import Home from './Home';
 import NavBar from './NavBar';
-import SignUpForm from './SignUpForm';
-import LoginForm from './LoginForm';
-import Main from './Main';
-import Region from './region/Region';
+import Routing from './routing-nav/Routing';
 import './App.css';
+
 
 /**  A key to store token in local storage */
 export const TOKEN_STORAGE_ID = 'local-provisions-token';
@@ -81,25 +77,20 @@ function App() {
   
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar logout={logout}/>
-      </header>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/signup' element={<SignUpForm signup={signup}/>} />
-          <Route path='/main' element={<Main />} />
-          <Route path='/login' element={<LoginForm login={login}/>} />
-          <Route path='/sf-bayarea' element={<Region regName='san francisco'/>} />
-          <Route path='/los-angeles' element={<Region regName='los angeles'/>} />
-          <Route path='/new-york' element={<Region regName='new york'/>} />
-          <Route path='/chicago' element={<Region regName='chicago'/>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+
+        <UserContext.Provider value={{currentUser, setCurrentUser,}}>
+          <div className='App'>
+            <header className='App-header'>
+              <BrowserRouter>
+                <NavBar logout={logout} />
+              </BrowserRouter>
+            </header>
+            <Routing login={login} signup={signup} />
+          </div>
+        </UserContext.Provider>
 
   );
 }
 
 export default App;
+ 

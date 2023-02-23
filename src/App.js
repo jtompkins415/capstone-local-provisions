@@ -9,13 +9,10 @@ import Routing from './routing-nav/Routing';
 import './App.css';
 
 
-/**  A key to store token in local storage */
-export const TOKEN_STORAGE_ID = 'local-provisions-token';
-
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID)
+  const [token, setToken] = useLocalStorage(null)
   const [infoLoaded, setInfoLoaded] = useState(false);
 
 
@@ -29,7 +26,7 @@ function App() {
           let currUser = await LocalProvisionsUserAPI.getCurrUser(username);
           setCurrentUser(currUser);
         }catch(err){
-          console.err("App getUserInfo: problem loading", err);
+          console.error("App getUserInfo: problem loading", err);
           setCurrentUser(null);
         }
       }

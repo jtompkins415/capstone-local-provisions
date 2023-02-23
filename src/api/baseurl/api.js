@@ -38,7 +38,6 @@ class LocalProvisionsUserAPI {
 
     static async userLogin(data){
         let res = await this.request('user/token', data, 'get')
-        this.token = res.token;
         return res.token
     }
 

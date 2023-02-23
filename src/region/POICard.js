@@ -19,7 +19,8 @@ const POICard = ({name, rating, price_level, place_id}) => {
 
     console.log(place_id);
     
-    
+    //Async function to get details about a place based on the place_id, then use the photo reference to get photo for the location
+
     useEffect(() => {
         async function getPlaceDetails(){
             const response = await axios.get(`${BASE_URL_DETAILS}?place_id=${place_id}&fields=photo&key=${API_KEY}`);

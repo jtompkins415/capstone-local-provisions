@@ -19,7 +19,10 @@ const NavBar = ({logout}) => {
     const location = useLocation();
     const isHomepage = location.pathname === '/main';
 
+  
     const toggleNavBar = () => setIsCollapsed(!isCollapsed);
+
+  //What to render when the user is logged in 
 
     const loggedInNav = () => {
       return (
@@ -40,7 +43,9 @@ const NavBar = ({logout}) => {
               </Nav>
       )
     }
-    
+  
+  //What to render when there is no user
+
     const loggedOutNav = () => {
       return (
               <Nav navbar>
@@ -61,6 +66,8 @@ const NavBar = ({logout}) => {
       )
     }
 
+    //Main render
+    
     return (
       <>
       <Navbar  className='Navbar' light >

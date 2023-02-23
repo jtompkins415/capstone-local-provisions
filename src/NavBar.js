@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import UserContext from './UserContext';
 import {
     Navbar,
     Nav,
@@ -11,37 +13,42 @@ import {
 import './NavBar.css';
 
 const NavBar = ({logout}) => {
-    
+    const {currentUser} = useContext(UserContext);
     const [isCollapsed, setIsCollapsed] = useState(true);
+
+    const location = useLocation();
+    const isHomepage = location.pathname === '/main';
 
     const toggleNavBar = () => setIsCollapsed(!isCollapsed);
 
-    return (
-        
-            // <Nav className="Navbar" justified>
-            //     <NavbarBrand href='/main' className='nav-brand'>
-            //         LOCAL PROVISIONS
-            //     </NavbarBrand>
-            //     <NavbarToggler onClick={toggleNavBar} className='me-2'/>
-            //     <NavItem>
-            //         <NavLink className='nav-link' href='/main'> HOME </NavLink>
-            //     </NavItem>
-            //     <NavItem>
-            //         <NavLink className="nav-link" href='/signup'> SIGN UP </NavLink>
-            //     </NavItem>
-            //     <NavItem>
-            //         <NavLink className="nav-link" href='/login'> LOGIN </NavLink>
-            //     </NavItem>
-            // </Nav>
-
-
-            <Navbar  className='Navbar' light >
-            <NavbarBrand href="/main" className="nav-link">
-              LOCAL PROVISIONS
-            </NavbarBrand>
-            <NavbarToggler onClick={toggleNavBar} className="me-2" />
-            <Collapse isOpen={!isCollapsed} navbar>
+    const loggedInNav = () => {
+      return (
               <Nav navbar>
+                <NavItem>
+                  <NavLink href="/about" className='nav-link'>
+                    ABOUT
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/profile" className='nav-link'>PROFILE</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/main" className='nav-link' onClick={logout}>
+                    LOG OUT {currentUser.firstName || currentUser.username}
+                  </NavLink>
+                </NavItem>
+              </Nav>
+      )
+    }
+    
+    const loggedOutNav = () => {
+      return (
+              <Nav navbar>
+                <NavItem>
+                  <NavLink href="/about" className='nav-link'>
+                    ABOUT
+                  </NavLink>
+                </NavItem>
                 <NavItem>
                   <NavLink href="/signup" className='nav-link'>SIGN UP</NavLink>
                 </NavItem>
@@ -51,10 +58,24 @@ const NavBar = ({logout}) => {
                   </NavLink>
                 </NavItem>
               </Nav>
+      )
+    }
+
+    return (
+      <>
+      <Navbar  className='Navbar' light >
+           {!isHomepage && ( <NavbarBrand href="/main" className="nav-link">
+              LOCAL PROVISIONS
+            </NavbarBrand>)}
+            <NavbarToggler onClick={toggleNavBar} className="me-2" />
+            <Collapse isOpen={!isCollapsed} navbar>
+              {currentUser ? loggedInNav(): loggedOutNav()}
             </Collapse>
           </Navbar>
 
+      </>
     )
-};
 
+}
+    
 export default NavBar;

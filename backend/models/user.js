@@ -35,6 +35,7 @@ class User {
     );
 
     const user = result.rows[0];
+    console.log({user, username});
 
     if (user) {
       // compare hashed password to a new hash from password
@@ -141,6 +142,8 @@ class User {
 
     const user = userRes.rows[0];
 
+    console.log("I'm here too")
+
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
     return user;
@@ -187,6 +190,8 @@ class User {
                                 isAdmin AS "isAdmin"`;
     const result = await db.query(querySql, [...values, username]);
     const user = result.rows[0];
+    
+    console.log("I'm here too")
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
 

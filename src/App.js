@@ -16,7 +16,7 @@ function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
 
 
-   useEffect(function getUserInfo(){
+   useEffect(() => {
     
     const getCurrUser = async () => {
       if (token){

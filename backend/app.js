@@ -33,12 +33,13 @@ app.get(`/maps/api/place/nearbysearch/location`, async (req, res, next) => {
 });
 
 //Route to talk to Google Place Details API
-app.get('/maps/api/place/details/place_id', async (req, res, next) => {
+app.get('/maps/api/place/details', async (req, res, next) => {
 	const {place_id, fields, key} = req.query;
 	const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&fields=${fields}&key=${key}`;
 	
 	try{
 		const results = await axios.get(url);
+		console.log(results);
 		return res.json(results.data);
 	} catch(err){
 		return next(err);

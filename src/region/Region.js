@@ -58,7 +58,7 @@ const Region = ({regName}) => {
     console.log(pois)
 
     let poiElm = pois.map(p => {
-        return <POICard key={p.name} name={p.name} rating={p.rating} price_level={p.price_level} img={p.photos[0].photo_reference} />
+        return <POICard key={p.name} name={p.name} rating={p.rating} price_level={p.price_level} place_id={p.place_id} />
     })
     
     let imageUrl = regionMap[regName]

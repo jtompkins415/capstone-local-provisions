@@ -30,13 +30,12 @@ router.get('/', async (req, res, next) => {
  * Return user information
 */
 
-router.get('/detail/:username', async (req, res, next) => {
+router.get('/details/:username', async (req, res, next) => {
     console.log("I'm here")
     try{
         const {username} = req.params;
         const user = await User.get(username);
-
-        return res.status(200).json({user})
+        return res.status(200).json(user)
     } catch(err){
         return next(err);
     }
@@ -54,7 +53,7 @@ router.post('/register', async (req, res, next) => {
         console.log('req.body: ', req.body)
         const newUser = await User.register({...req.body, isAdmin:false});
         const newToken = createToken(newUser);
-        return res.status(201).json({newToken});
+        return res.status(201).json(newToken);
     } catch(err){
         return next(err)
     }

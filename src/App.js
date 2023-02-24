@@ -4,25 +4,37 @@ import useLocalStorage from './hooks/useLocalStorage';
 import { decodeToken } from 'react-jwt';
 import LocalProvisionsUserAPI from './api/baseurl/api';
 import UserContext from './UserContext';
+import { Spinner } from 'reactstrap';
 import NavBar from './NavBar';
 import Routing from './routing-nav/Routing';
 import './App.css';
 
+export const TOKEN_STORAGE = 'token';
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useLocalStorage(null)
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE)
   const [infoLoaded, setInfoLoaded] = useState(false);
 
-
+   
+  /**
+   * Effect to get current user.
+   * 
+   * If there is a token present in local storage,
+   * get username from token,
+   * use LocalProvisionsUserAPI to talk to backend
+   * retrieve user obj:
+   * 
+   * {username, }
+   * 
+   */
    useEffect(() => {
     
     const getCurrUser = async () => {
       if (token){
         try{
           let {username} = decodeToken(token);
-          LocalProvisionsUserAPI.token = token;
           let currUser = await LocalProvisionsUserAPI.getCurrUser(username);
           setCurrentUser(currUser);
         }catch(err){
@@ -36,11 +48,13 @@ function App() {
     getCurrUser()
   }, [token]);
 
+
   /** Handles site-wide logout  */
 
    const logout = () => {
     setCurrentUser(null);
     setToken(null);
+    console.log(currentUser, token);
    }
 
   /** Handle site-wide login */
@@ -71,7 +85,7 @@ function App() {
     }
   }
   
-  
+  if (!infoLoaded) return <Spinner>Loading...</Spinner>
 
   return (
 

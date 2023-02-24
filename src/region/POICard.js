@@ -17,15 +17,21 @@ const POICard = ({name, rating, price_level, place_id}) => {
     
     const [photoUrl, setPhotoUrl] = useState(null)
     const [poiUrl, setPoiUrl] = useState(null)
+    const [poiSummary, setPoiSummary] = useState('')
 
     
     //Async function to get details about a place based on the place_id, then use the photo reference to get photo for the location
 
     useEffect(() => {
         async function getPlaceDetails(){
-            const response = await axios.get(`${BASE_URL_DETAILS}?place_id=${place_id}&fields=photo,url&key=${API_KEY}`);
+            const response = await axios.get(`${BASE_URL_DETAILS}?place_id=${place_id}&fields=photo,url,editorial_summary&key=${API_KEY}`);
             const photoRef = response.data.result?.photos?.[0]?.photo_reference;
+            const summary = response.data.result?.editorial_summary?.overview;
             const url = response.data.result?.url
+            
+            if(summary){
+                setPoiSummary(summary);
+            }
             
             if(url){
                 setPoiUrl(url);
@@ -57,6 +63,8 @@ const POICard = ({name, rating, price_level, place_id}) => {
                     {name}
                 </CardTitle>
                 <CardText>
+                    {poiSummary}
+                    <br/>
                    <b> Rating: {rating}</b>
                     <br/>
                     Price: {dollarSigns}

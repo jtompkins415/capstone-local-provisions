@@ -20,11 +20,11 @@
 .About-body p {
     text-transform: uppercase;
     width: 30rem;
-    font-size: 25px;
+    font-size: 1.7rem;
     text-align: right;
-    margin-top: 50px;
+    margin-top: 2rem;
     margin-left: auto;
-    margin-right: 100px;
+    margin-right: 5rem;
     float: right;
     letter-spacing: .2rem;
 }

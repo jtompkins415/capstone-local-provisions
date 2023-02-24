@@ -30,28 +30,31 @@ class LocalProvisionsUserAPI {
     /** Get current user */
 
     static async getCurrUser(username){
-         let res = this.request(`user/${username}`)
-         return res.user
+         let res = await this.request(`user/details/${username}`)
+         console.log(res)
+         return res
     }
 
     /** Get login token from username and password  */
 
     static async userLogin(data){
         let res = await this.request('user/token', data, 'get')
-        return res.token
+        localStorage.setItem('token', res);
+        return res
     }
 
     /** Sign up user and return authentication token  */
 
     static async userSignup(data){
         let res = await this.request('user/register', data, 'post');
-        this.token = res.token
-        return res.token
+        localStorage.setItem('token', res)
+        return res
     }
 
     /** Delete user and return confirmation message */
     static async userDelete(username){
         let res = await this.request(`user/${username}`,{}, 'delete')
+
         return res.deleted
     }
 }

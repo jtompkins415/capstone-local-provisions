@@ -35,7 +35,6 @@ class User {
     );
 
     const user = result.rows[0];
-    console.log({user, username});
 
     if (user) {
       // compare hashed password to a new hash from password
@@ -97,7 +96,7 @@ class User {
 
     const user = result.rows[0];
     
-    console.log('user.register() user'. user);
+    console.log('user.register() user', user);
 
     return user;
   }

@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import Home from "../Home";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Main from "../Main";
 import SignUpForm from "../SignUpForm";
 import LoginForm from "../LoginForm";
@@ -8,7 +7,7 @@ import About from "../About";
 import Profile from "../Profile";
 
 
-const Routing =  ({login, signup, username}) =>{
+const Routing =  ({login, signup}) =>{
     return (
         <>
         <BrowserRouter>
@@ -17,7 +16,6 @@ const Routing =  ({login, signup, username}) =>{
                 <Route path='/signup' element={<SignUpForm signup={signup}/>} />
                 <Route path='/main' element={<Main />} />
                 <Route path='/login' element={<LoginForm login={login}/>} /> 
-               
                 <Route path='/sf-bayarea' element={<Region regName='san francisco'/>} />
                 <Route path='/los-angeles' element={<Region regName='los angeles'/>} />
                 <Route path='/new-york' element={<Region regName='new york'/>} />

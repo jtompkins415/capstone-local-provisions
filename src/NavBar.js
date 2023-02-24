@@ -19,7 +19,7 @@ const NavBar = ({logout}) => {
       console.log(currentUser);
 
     const location = useLocation();
-    const isHomepage = location.pathname === '/main';
+    const isHomepage = location.pathname === '/main' || location.pathname === '/';
 
     console.log(isHomepage)
   

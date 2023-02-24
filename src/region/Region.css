@@ -10,3 +10,8 @@
     color:#32292F;
     font-family: 'PT Sans Narrow', sans-serif;
 }
+
+.Region-body {
+    display: inline-block;
+    justify-content: center;
+}

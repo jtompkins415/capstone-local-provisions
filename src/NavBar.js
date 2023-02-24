@@ -16,9 +16,12 @@ const NavBar = ({logout}) => {
     const {currentUser} = useContext(UserContext);
     const [isCollapsed, setIsCollapsed] = useState(true);
 
+      console.log(currentUser);
+
     const location = useLocation();
     const isHomepage = location.pathname === '/main';
 
+    console.log(isHomepage)
   
     const toggleNavBar = () => setIsCollapsed(!isCollapsed);
 
@@ -33,11 +36,11 @@ const NavBar = ({logout}) => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/profile" className='nav-link'>PROFILE</NavLink>
+                  <NavLink href="/details/:username" className='nav-link'>PROFILE</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink href="/main" className='nav-link' onClick={logout}>
-                    LOG OUT {currentUser.firstName || currentUser.username}
+                    LOG OUT 
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -71,9 +74,9 @@ const NavBar = ({logout}) => {
     return (
       <>
       <Navbar  className='Navbar' light >
-           {!isHomepage && ( <NavbarBrand href="/main" className="nav-link">
-              LOCAL PROVISIONS
-            </NavbarBrand>)}
+           {!isHomepage ? ( <NavbarBrand href="/main" className="nav-link">
+              LOCAL PROVISION
+            </NavbarBrand>) : null}
             <NavbarToggler onClick={toggleNavBar} className="me-2" />
             <Collapse isOpen={!isCollapsed} navbar>
               {currentUser ? loggedInNav(): loggedOutNav()}

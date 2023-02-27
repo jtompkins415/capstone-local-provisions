@@ -4,7 +4,7 @@ import { Spinner } from 'reactstrap';
 
 import POICard from './POICard'
 import regionMap from './regionMap';
-import API_KEY from '../api/baseurl/APIKey';
+import API_KEY from '../api/API&Key/APIKey';
 import {BASE_URL_NEARBY} from '../BaseUrl';
 
 import './Region.css';

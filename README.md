@@ -4,6 +4,16 @@ LOCAL PROVISIONS is an single page application, inspired by EATER/THRILLIST, tha
 
 A user can register for the site, explore places of interest in different regions, and save them to be referenced later. 
 
+Tools for production:
+
+## Front end:
+    - React.js/Create React App
+    - Bootsrap/ Reactstrap
+
+## Back end:
+    - Express.js
+    - PostgreSQL
+
 ## --------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

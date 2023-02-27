@@ -62,7 +62,7 @@ const POICard = ({name, rating, price_level, place_id}) => {
                 <CardTitle className='poiCard-title'>
                     {name}
                 </CardTitle>
-                <CardText>
+                <CardText className='poiCard-body'>
                     {poiSummary}
                     <br/>
                    <b> Rating: {rating}</b>

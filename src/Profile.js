@@ -1,4 +1,4 @@
-import {  useContext, useState } from "react";
+import {  useContext } from "react";
 import UserContext from "./UserContext";
 import './Profile.css';
 
@@ -6,7 +6,7 @@ import './Profile.css';
 
 const Profile = () => {
 
-    const [favorites, setFavorites] = useState([]);
+    // const [favorites, setFavorites] = useState([]);
     const {currentUser} = useContext(UserContext);
     
     

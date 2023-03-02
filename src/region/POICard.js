@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import API_KEY from '../api/API&Key/APIKey';
-import {BASE_URL_PHOTO} from '../BaseUrl';
 import {BASE_URL_DETAILS} from '../BaseUrl'
 import axios from 'axios';
 import {

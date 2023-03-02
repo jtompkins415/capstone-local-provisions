@@ -16,7 +16,7 @@ const LoginForm = ({login}) => {
         username: '',
         password: ''
     })
-    const [formErrors, setFormErrors] = useState([])
+    
 
 
     const handleChange = (evt) => {
@@ -30,7 +30,7 @@ const LoginForm = ({login}) => {
         if(res.success){
             return navigate('/main')
         } else {
-            setFormErrors(res.errors)
+            console.error(res.errors)
         }
     }
 

@@ -8,7 +8,6 @@ import {
     Button,
     Col
 } from 'reactstrap';
-import Alert from './Alert';
 import './Form.css'
 
 const SignUpForm = ({signup}) => {
@@ -21,7 +20,7 @@ const SignUpForm = ({signup}) => {
         password: ''
     })
     
-    const [formErrors, setFormErrors] = useState([])
+   
 
 
     const handleChange = (evt) => {
@@ -35,7 +34,7 @@ const SignUpForm = ({signup}) => {
         if(res.success){
             return navigate('/main')
         } else {
-            setFormErrors(res.errors);
+            console.error(res.errors);
         }
     }
 

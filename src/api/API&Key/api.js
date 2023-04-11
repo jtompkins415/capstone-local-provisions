@@ -46,7 +46,7 @@ class LocalProvisionsUserAPI {
     /** Sign up user and return authentication token  */
 
     static async userSignup(data){
-        let res = await this.request('user/register', data, 'post');
+        let res = await this.request('user/register', {data}, 'post');
         localStorage.setItem('token', res)
         return res
     }

@@ -25,7 +25,13 @@ const Region = ({regName}) => {
     useEffect(() => {
         async function getLatLng(){
             let res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${regName}&key=${API_KEY}`)
-                
+            
+
+            // What if there no results: I want to search for st. louis
+            // What if you can query a person's locations
+
+
+    
             const {lat, lng} = res.data.results[0].geometry.location;
             setLatitude(lat);
             setLongitude(lng);

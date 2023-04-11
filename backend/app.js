@@ -9,8 +9,13 @@ const userRoutes = require('./routes/user');
 
 const app = express();
 
+const corsOptions = {
+	origin: 'https://stately-baklava-c369d6.netlify.app',
+	optionsSuccessStatus: 200
+};
+
 app.use(morgan('tiny'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
